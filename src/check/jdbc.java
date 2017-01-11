@@ -9,14 +9,14 @@ import java.sql.Statement;
  
 public class jdbc { 
   private Connection con = null; //Database objects 
-  //³s±µobject 
+  //é€£æ¥object 
   private Statement stat = null; 
-  //°õ¦æ,¶Ç¤J¤§sql¬°§¹¾ã¦r¦ê 
+  //åŸ·è¡Œ,å‚³å…¥ä¹‹sqlç‚ºå®Œæ•´å­—ä¸² 
   private ResultSet rs = null; 
-  //µ²ªG¶° 
+  //çµæœé›† 
   private PreparedStatement pst = null; 
-  //°õ¦æ,¶Ç¤J¤§sql¬°¹wÀx¤§¦r¥Ó,»İ­n¶Ç¤JÅÜ¼Æ¤§¦ì¸m 
-  //¥ı§Q¥Î?¨Ó°µ¼Ğ¥Ü 
+  //åŸ·è¡Œ,å‚³å…¥ä¹‹sqlç‚ºé å„²ä¹‹å­—ç”³,éœ€è¦å‚³å…¥è®Šæ•¸ä¹‹ä½ç½® 
+  //å…ˆåˆ©ç”¨?ä¾†åšæ¨™ç¤º 
   
   private String dropdbSQL = "check"; 
   private String selectSQL = "select * from check ";
@@ -37,27 +37,27 @@ public class jdbc {
   { 
     try { 
       Class.forName("com.mysql.jdbc.Driver"); 
-      //µù¥Udriver 
+      //è¨»å†Šdriver 
       con = DriverManager.getConnection( 
       "jdbc:mysql://localhost/"+dbname+"?useUnicode=true&characterEncoding=Big5", 
       account,password); 
-//¨ú±oconnection
+//å–å¾—connection
 //jdbc:mysql://localhost/test?useUnicode=true&characterEncoding=Big5
-//localhost¬O¥D¾÷¦W,test¬Odatabase¦W
-//useUnicode=true&characterEncoding=Big5¨Ï¥Îªº½s½X 
+//localhostæ˜¯ä¸»æ©Ÿå,testæ˜¯databaseå
+//useUnicode=true&characterEncoding=Big5ä½¿ç”¨çš„ç·¨ç¢¼ 
       
     } 
     catch(ClassNotFoundException e) 
     { 
       System.out.println("DriverClassNotFound :"+e.toString()); 
-    }//¦³¥i¯à·|²£¥Ísqlexception 
+    }//æœ‰å¯èƒ½æœƒç”¢ç”Ÿsqlexception 
     catch(SQLException x) { 
       System.out.println("Exception :"+x.toString()); 
     } 
     
   } 
-  //«Ø¥ßtableªº¤è¦¡ 
-  //¥i¥H¬İ¬İStatementªº¨Ï¥Î¤è¦¡ 
+  //å»ºç«‹tableçš„æ–¹å¼ 
+  //å¯ä»¥çœ‹çœ‹Statementçš„ä½¿ç”¨æ–¹å¼ 
   public void createTable(String c) 
   { 
     try 
@@ -74,8 +74,8 @@ public class jdbc {
       close(); 
     } 
   } 
-  //·s¼W¸ê®Æ 
-  //¥i¥H¬İ¬İPrepareStatementªº¨Ï¥Î¤è¦¡ 
+  //æ–°å¢è³‡æ–™ 
+  //å¯ä»¥çœ‹çœ‹PrepareStatementçš„ä½¿ç”¨æ–¹å¼ 
   // private String insertdbSQL = "insert into User(id,day,passwd) " 
 	      // "select ifNULL(max(id),0)+1,?,? FROM User"; 
   public void insertTable(String c,String serial,int y,int m,int day,int hr,int min,int sec) 
@@ -102,8 +102,8 @@ public class jdbc {
       close(); 
     } 
   } 
-  //¬d¸ß¸ê®Æ 
-  //¥i¥H¬İ¬İ¦^¶Çµ²ªG¶°¤Î¨ú±o¸ê®Æ¤è¦¡ 
+  //æŸ¥è©¢è³‡æ–™ 
+  //å¯ä»¥çœ‹çœ‹å›å‚³çµæœé›†åŠå–å¾—è³‡æ–™æ–¹å¼ 
   
   public String SelectTable(String  d,String  c) 
   { 
@@ -115,12 +115,12 @@ public class jdbc {
       //System.out.println("ID\t\tName\t\tPASSWORD"); 
       while(rs.next()) 
       { 
-        System.out.println(rs.getString("serial")+"\t\t"+rs.getString("year")+"¦~"+rs.getString("month")+"¤ë"+
-        		rs.getString("day")+"¤é"+rs.getString("hr")+"®É"+rs.getString("min")+"¤À"+rs.getString("sec")+"¬í"
+        System.out.println(rs.getString("serial")+"\t\t"+rs.getString("year")+"å¹´"+rs.getString("month")+"æœˆ"+
+        		rs.getString("day")+"æ—¥"+rs.getString("hr")+"æ™‚"+rs.getString("min")+"åˆ†"+rs.getString("sec")+"ç§’"
         		); 
-        b=b+rs.getString("year")+"¦~"+rs.getString("month")+"¤ë"+
-        		rs.getString("day")+"¤é"+rs.getString("hr")+"®É"+rs.getString("min")+"¤À"+
-        		rs.getString("sec")+"¬í\n"
+        b=b+rs.getString("year")+"å¹´"+rs.getString("month")+"æœˆ"+
+        		rs.getString("day")+"æ—¥"+rs.getString("hr")+"æ™‚"+rs.getString("min")+"åˆ†"+
+        		rs.getString("sec")+"ç§’\n"
         		
         		; 
       } 
@@ -158,8 +158,8 @@ public class jdbc {
       close(); 
     } 
   }
-  //§¹¾ã¨Ï¥Î§¹¸ê®Æ®w«á,°O±o­nÃö³¬©Ò¦³Object 
-  //§_«h¦bµ¥«İTimeout®É,¥i¯à·|¦³Connection poorªºª¬ªp 
+  //å®Œæ•´ä½¿ç”¨å®Œè³‡æ–™åº«å¾Œ,è¨˜å¾—è¦é—œé–‰æ‰€æœ‰Object 
+  //å¦å‰‡åœ¨ç­‰å¾…Timeoutæ™‚,å¯èƒ½æœƒæœ‰Connection poorçš„ç‹€æ³ 
   public void close() 
   { 
     try 
@@ -189,8 +189,8 @@ public class jdbc {
  
   public static void main(String[] args) 
   { 
-    //´ú¬İ¬İ¬O§_¥¿±` 
-    jdbc test = new jdbc("nfc","root","50150"); 
+
+    jdbc test = new jdbc("dbname","user","password"); 
     //test.dropTable(); 
     test.createTable(createdbSQL); 
     //test.insertTable("yku", "12356"); 
